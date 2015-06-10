@@ -1,0 +1,23 @@
+<tool id="read_450k_samplesheet" name="Read illumina 450k samplesheet" version="0.1.0">
+    <description>Read in Illumina's 450k methylation arrays which are in IDAT format,
+        tool takes in a samplesheet and returns Beta Values</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <requirements>
+        <requirement type="R-module" version="1.15.7">minfi</requirement>
+    </requirements>
+    <command interpreter="Rscript">
+        read_450k_samplesheet.R $folder
+    </command>
+    <inputs>
+        <param type="data" name="input1" format="idat" />
+        <param type="data" name="input2" format="idat" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" from_work_dir="classified_seqs.txt" />
+    </outputs>
+    <help><![CDATA[
+        read_450k_samplesheet.R full/path/to/baseDir
+    ]]></help>
+</tool>

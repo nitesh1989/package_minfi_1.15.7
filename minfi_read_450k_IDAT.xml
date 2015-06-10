@@ -1,0 +1,31 @@
+<tool id="read_450_IDAT" name="Read 450K IDAT file" version="1.0">
+    <description>Read in Illumina's 450k methylation arrays which are in IDAT format</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <requirements>
+        <requirement type="R-module" version="1.15.7">minfi</requirement>
+    </requirements>
+    <command interpreter="Rscript">
+        minfi_read_450k_IDAT.R $input
+        # ln -s "${input}" ".idat" &amp;&amp;
+
+    </command>
+    <inputs>
+        <param type="data" name="input" format="idat" />
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="450K Beta values" />
+    </outputs>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btu049</citation>
+    </citations>
+    <help><![CDATA[
+        Reads in Illumina 450K file which are in IDAT format. Each sample needs both the Red and Green channel IDAT files.
+
+        Input: IDAT files (Both Red and Green channel)
+        Output: Beta values
+    ]]>
+    </help>
+</tool>
+
