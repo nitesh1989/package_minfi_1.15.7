@@ -6,13 +6,12 @@
     <requirements>
         <requirement type="R-module" version="1.15.7">minfi</requirement>
     </requirements>
-    <command interpreter="Rscript">
-        minfi_read_450k_IDAT.R $input
-        # ln -s "${input}" ".idat" &amp;&amp;
-
+    <command>
+        Rscript minfi_read_450k_IDAT.R $input1
     </command>
     <inputs>
-        <param type="data" name="input" format="idat" />
+        <param name="control" type="data_collection" format="idat" label="control" collection_type="list:paired"/>
+        <param name="case" type="data_collection" format="idat" label="case" collection_type="list:paired"/>
     </inputs>
     <outputs>
         <data name="output" format="tabular" label="450K Beta values" />

@@ -1,0 +1,25 @@
+<tool id="get_TCGA_Methylation_data" name="Get TCGA 450k data" version="1.0">
+    <description>Get 450k methylation arrays which are in IDAT format from TCGA GDAC and unpack</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <command interpreter="python">get_TCGA_Methylation_data.py $input</command>
+    <inputs>
+          <param name="input" type="data"/>
+    </inputs>
+    <outputs>
+        <data name="manifest" format="txt" label="File Manifest" from_work_dir="gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0/MANIFEST.txt" />
+        <data name="data" format="txt" label="Probe and Sample wise data" from_work_dir="gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0/UCEC.methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.data.txt" />
+    </outputs>
+    <help><![CDATA[
+        Input: GDAC link from a illumina human methylation array from TCGA
+
+        http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0.tar.gz
+
+        Output: Two files which consist of the Manifest and the probe wise methylation values (.data.txt)
+
+
+    ]]>
+    </help>
+</tool>
+

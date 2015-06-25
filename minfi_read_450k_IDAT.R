@@ -17,5 +17,12 @@ print(args[1])
 
 input_idat = args[1]
 RGset = read.450k(input_idat,verbose=T)
-beta = getBeta(RGset)
-beta
+save(RGset,file="RGset.RData")
+
+
+# RGset1 = read.450k("/Users/nturaga/Library/R/3.2/library/minfiData/extdata/5723646053/5723646053_R04C02_Grn.idat",verbose=T)
+# 
+# RGset2 = read.450k("/Users/nturaga/Library/R/3.2/library/minfiData/extdata/5723646052/5723646052_R05C02_Grn.idat",verbose=T)
+# 
+# ?minfi::readTCGA
+# install.packages("data.table")

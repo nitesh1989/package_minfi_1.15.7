@@ -1,0 +1,47 @@
+<tool id="read_TCGA" name="Read TCGA 450k matrix" version="1.0">
+    <description>Read in Illumina's 450k methylation arrays which are in IDAT format from TCGA GDAC</description>
+    <requirements>
+        <requirement type="R-module" version="1.15.7">minfi</requirement>
+    </requirements>
+    <command interpreter="Rscript">
+        read_TCGA.R -f $input -o $output
+    </command>
+    <inputs>
+          <param name="input" type="data" format="txt" />
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="450K Beta values" />
+    </outputs>
+<!--    <outputs>
+        <data name="output" format="txt" label="450K Beta values" from_work_dir="beta_value.txt" />
+    </outputs> -->
+    <configfiles>
+        <configfile name="script_file">
+        ## Setup R error handling to go to stderr
+        options( show.error.messages=F, error = function () { cat( geterrmessage(), file=stderr() ); q( "no", 1, F ) } )
+        </configfile>
+    </configfiles>
+
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btu049</citation>
+    </citations>
+    <help><![CDATA[
+
+        Usage:
+
+        The tool takes in a file from
+
+        Reads in Illumina 450K file which are in IDAT format. Each sample needs both the Red and Green channel IDAT files.
+
+        Input: GDAC link from a illumina human methylation array from TCGA
+
+        http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0.tar.gz
+
+        Output: Beta values/RGSet for futher processing and use
+
+        Beta values can be used with ELMER tool, which is present on test toolshed.
+
+    ]]>
+    </help>
+</tool>
+

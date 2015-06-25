@@ -1,0 +1,38 @@
+###################################################
+# code chunk number 1: Record starting time
+###################################################
+timeStart <- as.character(Sys.time())
+
+### code chunk number 2: Load all required libraries
+msg.out1 <- capture.output( suppressMessages( library(IlluminaHumanMethylation450kanno.ilmn12.hg19,quietly=TRUE,warn.conflicts=FALSE,verbose=FALSE)))
+msg.out2 <- capture.output( suppressMessages( library(minfi,quietly=TRUE,warn.conflicts=FALSE,verbose=FALSE)))
+require("getopt",quietly=TRUE)
+
+### code chunk number 3: Update package version
+if (packageVersion("minfi") < "1.15.6") {
+  stop("Please update 'minfi' to version >= 1.15.7  to run this tool")
+}
+
+# Make an option specification, with the following arguments:
+# 1.
+
+option_specification = matrix(c(
+  'gdac', 'f', 1, 'character',
+  'output','o', 2, 'character'
+), byrow=TRUE, ncol=4);
+
+# Parse options
+options = getopt(option_specification);
+
+# Get the options
+input_file = options$gdac
+output = options$output
+
+# Read the TCGA data
+dat = readTCGA(input_file, sep = "\t", keyName = "Composite Element REF", Betaname = "Beta_value", pData = NULL, array = "IlluminaHumanMethylation450k")
+
+#Get beta values
+beta = getBeta(dat)
+
+
+write.table(beta, file = output,row.names = F,quote = F, sep="\t")
