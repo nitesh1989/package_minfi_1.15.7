@@ -17,22 +17,17 @@ if (packageVersion("minfi") < "1.15.6") {
 # 1.
 
 option_specification = matrix(c(
-  'gdac', 'f', 1, 'character',
+  'input', 'i', 1, 'character',
   'output','o', 2, 'character'
 ), byrow=TRUE, ncol=4);
 
 # Parse options
 options = getopt(option_specification);
 
-# Get the options
-input_file = options$gdac
-output = options$output
-
 # Read the TCGA data
-dat = readTCGA(input_file, sep = "\t", keyName = "Composite Element REF", Betaname = "Beta_value", pData = NULL, array = "IlluminaHumanMethylation450k")
+dat = readTCGA(options$input, sep = "\t", keyName = "Composite Element REF", Betaname = "Beta_value", pData = NULL, array = "IlluminaHumanMethylation450k",showProgress=FALSE)
 
 #Get beta values
 beta = getBeta(dat)
 
-
-write.table(beta, file = output,row.names = F,quote = F, sep="\t")
+write.table(beta, file = options$output ,row.names = F,quote = F, sep="\t")

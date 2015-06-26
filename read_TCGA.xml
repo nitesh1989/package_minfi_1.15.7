@@ -4,7 +4,7 @@
         <requirement type="R-module" version="1.15.7">minfi</requirement>
     </requirements>
     <command interpreter="Rscript">
-        read_TCGA.R -f $input -o $output
+        read_TCGA.R -i $input -o $output
     </command>
     <inputs>
           <param name="input" type="data" format="txt" />
