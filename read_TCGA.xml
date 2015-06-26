@@ -34,6 +34,20 @@
 
         Input:
 
+        Currently, an example of a file that this function reads is here:
+        (http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_
+        methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_
+        function__data.Level_3.2014101700.0.0.tar.gz)
+
+        Step 1.        Upload the file into galaxy
+        Step 2.        Run the "Get TCGA 450k data" tool on the resultant tar file in your history.
+        Step 3.        Once you have the "Probe and sample wise data" generated, Run "Read TCGA 450k matrix" to generate beta values.
+
+        Output:
+
+        Beta values in tabular/matrix format which can be used in multiple tools.
+
+        Eg: ELMER, minfi, bumphunter
 
 
     ]]>
