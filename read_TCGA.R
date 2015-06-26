@@ -14,7 +14,8 @@ if (packageVersion("minfi") < "1.15.6") {
 }
 
 # Make an option specification, with the following arguments:
-# 1.
+# 1. input is a gdac downloaded TCGA matrix
+# 2. output is an optional
 
 option_specification = matrix(c(
   'input', 'i', 1, 'character',
@@ -30,4 +31,5 @@ dat = readTCGA(options$input, sep = "\t", keyName = "Composite Element REF", Bet
 #Get beta values
 beta = getBeta(dat)
 
+# Store beta values in a
 write.table(beta, file = options$output ,row.names = F,quote = F, sep="\t")

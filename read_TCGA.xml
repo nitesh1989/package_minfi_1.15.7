@@ -27,19 +27,14 @@
     </citations>
     <help><![CDATA[
 
-        Usage:
+        This tool returns a matrix of "beta values" from Illumina 450k Methylation data, from TCGA.
 
-        The tool takes in a file from
+        Usage
+        =============
 
-        Reads in Illumina 450K file which are in IDAT format. Each sample needs both the Red and Green channel IDAT files.
+        Input:
 
-        Input: GDAC link from a illumina human methylation array from TCGA
 
-        http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0.tar.gz
-
-        Output: Beta values/RGSet for futher processing and use
-
-        Beta values can be used with ELMER tool, which is present on test toolshed.
 
     ]]>
     </help>
