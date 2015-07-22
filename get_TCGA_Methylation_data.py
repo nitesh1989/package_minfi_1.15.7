@@ -1,6 +1,5 @@
 import sys
 import tarfile
-import os
 
 
 # Un tar file
