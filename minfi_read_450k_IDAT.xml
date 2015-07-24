@@ -43,11 +43,6 @@ colnames(minfi_config) = c("status","green","red","name")
 base_dir = paste0("$__new_file_path__","/base")
 system(paste0("mkdir ",base_dir))
 
-
-minfi_config\$name
-
-class(minfi_config)
-
 ### Make symlinks of files
 for (i in 1:nrow(minfi_config)){
   stopifnot(nrow(minfi_config) == nrow(minfi_config["name"]))
@@ -55,13 +50,15 @@ for (i in 1:nrow(minfi_config)){
   ### Make green idat file symlinks
   file_green = paste0(base_dir,"/",as.character(minfi_config[i,"name"]),"_Grn.idat")
   cmd_green = paste("ln -s",as.character(minfi_config[i,"green"]),file_green,sep=" ")
-  cat("Symlink for Green Idat file number ",i," ", cmd_green)
+  print(" ")
+  cat("Reading file ",i,"GREEN Channel ", file_green)
   system(cmd_green)
   
   ### Make red idat file symlinks
   file_red = paste0(base_dir,"/",as.character(minfi_config[i,"name"]),"_Red.idat")
   cmd_red = paste("ln -s",as.character(minfi_config[i,"red"]),file_red,sep=" ")
-  cat("Symlink for Red Idat file number ",i," ", cmd_red)
+  print(" ")
+  cat("Reading file ",i,"RED Channel ", file_red)
   system(cmd_red)
 }
 
@@ -69,14 +66,16 @@ for (i in 1:nrow(minfi_config)){
 Basename = paste0(base_dir,"/",unique(substr(list.files(base_dir),1,17)))
 status = minfi_config[match(gsub(".+/","",Basename), minfi_config\$name),"status"]
 targets = data.frame(Basename=Basename,status=status)
-cat("Targets file for reading 450K files")
-targets
 
 ### Read 450k files
 RGset = read.450k.exp(targets=targets,verbose=T)
 
-save(RGset, file="RGset.RData")
+cat("RGset for the IDAT files: ")
 
+RGset
+
+### Save file as RGset in the working directory
+save(RGset, file="RGset.RData")
       ]]></configfile>
     </configfiles>
     <outputs>
@@ -86,10 +85,26 @@ save(RGset, file="RGset.RData")
         <citation type="doi">10.1093/bioinformatics/btu049</citation>
     </citations>
     <help><![CDATA[
-        Reads in Illumina 450K file which are in IDAT format. Each sample needs both the Red and Green channel IDAT files.
+        Reads in Illumina 450K file which are in IDAT format. Each sample needs both the
+        Red and Green channel IDAT files.
 
-        Input: IDAT files (Both Red and Green channel)
-        Output: Beta values
+        Input: IDAT files (Both Red and Green channel). Make paired dataset collections, 
+        with RED and GREEN channel IDAT files.
+        
+        1. Upload IDAT(Both Red and green channel) files using the upload tool in Galaxy.
+        
+        2. Once the upload is completed, select the "Operations on Multiple Datasets" in 
+        the history panel. 
+        
+        3. Select the pairs of IDAT files to be analyzed, and click "For all selected".
+        
+        4. Choose the "Build List of Dataset pairs". Make the pairs and label the collections.
+        
+        5. Once the two dataset collections are prepared, run the tool to build the RGset.
+        
+        Output: RData file, which contains the RGset for IDAT files. 
+              
+        
     ]]>
     </help>
 </tool>
