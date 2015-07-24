@@ -75,12 +75,12 @@ targets
 ### Read 450k files
 RGset = read.450k.exp(targets=targets,verbose=T)
 
+save(RGset, file="RGset.RData")
 
       ]]></configfile>
     </configfiles>
     <outputs>
-      
-        <data name="output" format="tabular" label="450K Beta values" />
+        <data name="output" format="RData" label="RGset from input IDAT files" from_work_dir="RGset.RData"/>
     </outputs>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btu049</citation>
