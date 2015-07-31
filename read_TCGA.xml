@@ -30,7 +30,6 @@
         This tool returns a matrix of "beta values" from Illumina 450k Methylation data, from TCGA.
 
         Usage
-        =============
 
         Input:
 
