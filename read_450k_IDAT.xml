@@ -111,9 +111,6 @@
         <data name="RGset" format="rdata" label="RGset from input IDAT files" from_work_dir="RGset.rdata"/>
         <data name="beta_values" format="txt" label="Beta value matrix from input IDAT files" from_work_dir="beta_values.txt"/>
     </outputs>
-    <citations>
-        <citation type="doi">10.1093/bioinformatics/btu049</citation>
-    </citations>
     <help><![CDATA[
 
         Reads in Illumina 450K file which are in IDAT format. Each sample needs both the
@@ -138,5 +135,8 @@
 
     ]]>
     </help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btu049</citation>
+    </citations>
 </tool>
 
