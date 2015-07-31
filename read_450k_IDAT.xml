@@ -22,8 +22,6 @@
       ]]></configfile>
         <configfile name="minfi_read_450k_script"><![CDATA[
 
-          print("${preprocess.preprocess_method}")
-
           ### Start time for code, approximate
           timeStart <- as.character(Sys.time())
           ### code chunk number 2: Load all required libraries
@@ -49,14 +47,12 @@
             ### Make green idat file symlinks
             file_green = paste0(base_dir,"/",as.character(minfi_config[i,"name"]),"_Grn.idat")
             cmd_green = paste("ln -s",as.character(minfi_config[i,"green"]),file_green,sep=" ")
-            print(" ")
             cat("Reading file ",i,"GREEN Channel ", file_green)
             system(cmd_green)
 
             ### Make red idat file symlinks
             file_red = paste0(base_dir,"/",as.character(minfi_config[i,"name"]),"_Red.idat")
             cmd_red = paste("ln -s",as.character(minfi_config[i,"red"]),file_red,sep=" ")
-            print(" ")
             cat("Reading file ",i,"RED Channel ", file_red)
             system(cmd_red)
           }
@@ -68,8 +64,6 @@
 
           ### Read 450k files
           RGset = read.450k.exp(targets=targets,verbose=T)
-
-          cat("RGset for the IDAT files: ")
           RGset
 
 
