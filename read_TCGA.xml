@@ -6,22 +6,18 @@
     <command interpreter="Rscript">
         read_TCGA.R -i $input -o $output
     </command>
-    <inputs>
-          <param name="input" type="data" format="txt" />
-    </inputs>
-    <outputs>
-        <data name="output" format="tabular" label="450K Beta values" />
-    </outputs>
     <configfiles>
         <configfile name="script_file">
         ## Setup R error handling to go to stderr
         options( show.error.messages=F, error = function () { cat( geterrmessage(), file=stderr() ); q( "no", 1, F ) } )
         </configfile>
     </configfiles>
-
-    <citations>
-        <citation type="doi">10.1093/bioinformatics/btu049</citation>
-    </citations>
+    <inputs>
+          <param name="input" type="data" format="txt" />
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" label="450K Beta values" />
+    </outputs>
     <help><![CDATA[
 
         This tool returns a matrix of "beta values" from Illumina 450k Methylation data, from TCGA.
@@ -45,8 +41,10 @@
 
         Eg: ELMER, minfi, bumphunter
 
-
     ]]>
     </help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btu049</citation>
+    </citations>
 </tool>
 
