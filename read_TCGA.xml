@@ -12,9 +12,6 @@
     <outputs>
         <data name="output" format="tabular" label="450K Beta values" />
     </outputs>
-<!--    <outputs>
-        <data name="output" format="txt" label="450K Beta values" from_work_dir="beta_value.txt" />
-    </outputs> -->
     <configfiles>
         <configfile name="script_file">
         ## Setup R error handling to go to stderr
