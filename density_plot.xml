@@ -7,10 +7,11 @@
         <exit_code range="1:" />
     </stdio>
 	<command interpreter="Rscript">
-		density_plot.R --rgset=$RGset --pdffile=$pdffile --pngfile=$pngfile
+		density_plot.R --rgset=$RGset --xlabel="$xlabel" --pdffile=$pdffile --pngfile=$pngfile
 	</command>
     <inputs>
         <param name="RGset" type="data" format="rdata" label="Choose RGset for Density plot" />
+        <param name="xlabel" size="30" type="text" value="Beta values for RGset" label="Label for X axis"/>
     </inputs>
 	<outputs>
 	  <data format="pdf" name="pdffile" label="PDF of Density plot"/>

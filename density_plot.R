@@ -1,7 +1,10 @@
 #!/usr/bin/Rscript
 # Import some required libraries
+## Setup R error handling to go to stderr
 library('getopt');
-library('minfi')
+### code chunk: Load all required libraries quietly
+library(minfi, quietly=TRUE, warn.conflicts=FALSE,verbose = FALSE)
+
 # Make an option specification, with the following arguments:
 # 1. long flag
 # 2. short flag
@@ -9,6 +12,7 @@ library('minfi')
 # 4. target data type
 option_specification = matrix(c(
   'rgset','i',1,'character',
+  'xlabel','x',1,'character',
   'pdffile', 'f', 2, 'character',
   'pngfile', 'g', 2, 'character'
 ), byrow=TRUE, ncol=4);
@@ -16,25 +20,19 @@ option_specification = matrix(c(
 # Parse options
 options = getopt(option_specification);
 
-# Create some simple test data
+# Load the RGset data
 if(!is.null(options$rgset)){
 	load(options$rgset)
 }
-RGset
 
 # Set phenotype data
 pd = pData(RGset)
-pd$status
-
-options$pdffile
-options$pngfile
 
 # Produce PDF file
 if (!is.null(options$pdffile)) {
 	# Make PDF of density plot
 	pdf(options$pdffile)
-	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot")
-
+	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot",xlab=options$xlabel)
 	dev.off()
 }
 
@@ -42,7 +40,7 @@ if (!is.null(options$pdffile)) {
 if (!is.null(options$pngfile)) {
 	# Make PNG of density plot
 	png(options$pngfile)
-	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot")
+	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot",xlab=options$xlabel)
 	dev.off()
 }
 
