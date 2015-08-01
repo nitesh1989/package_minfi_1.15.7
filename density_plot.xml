@@ -17,17 +17,18 @@
 	  <data format="pdf" name="pdffile" label="PDF of Density plot"/>
 	  <data format="png" name="pngfile" label="PNG of Density plot"/>
 	</outputs>
-    <help><![CDATA[
+    <help>
 
-    Create density plots for 450k data, this is used for quality control.
+**What it does**
 
-	Input : An RGChannelSet We either use the getBeta function to get Beta values (for the first two) or we assume the matrix contains Beta values.
+Create density plots for 450k data, this is used for quality control.
 
-	It is better to give the tool, RGset as input to make it easier to collect the phenotype data from the object.
+**Input** : An RGChannelSet We either use the getBeta function to get Beta values (for the first two) or we assume the matrix contains Beta values.
 
-	Output: PDF or PNG file based on the option chosen.
+It is better to give the tool, RGset as input to make it easier to collect the phenotype data from the object.
 
-    ]]>
+**Output**: PDF or PNG file based on the option chosen.
+
     </help>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btu049</citation>

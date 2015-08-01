@@ -21,30 +21,28 @@
     <outputs>
         <data name="output" format="tabular" label="450K Beta values" />
     </outputs>
-    <help><![CDATA[
+    <help>
 
-        This tool returns a matrix of "beta values" from Illumina 450k Methylation data, from TCGA.
+**What it does**
+This tool returns a matrix of "beta values" from Illumina 450k Methylation data, from TCGA.
 
-        Usage
+**Input**:
 
-        Input:
+Currently, an example of a file that this function reads is here:
 
-        Currently, an example of a file that this function reads is here:
-        (http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_
-        methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_
-        function__data.Level_3.2014101700.0.0.tar.gz)
+http://gdac.broadinstitute.org/runs/stddata__2014_10_17/data/UCEC/20141017/gdac.broadinstitute.org_UCEC.Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data.Level_3.2014101700.0.0.tar.gz
 
-        Step 1.        Upload the file into galaxy
-        Step 2.        Run the "Get TCGA 450k data" tool on the resultant tar file in your history.
-        Step 3.        Once you have the "Probe and sample wise data" generated, Run "Read TCGA 450k matrix" to generate beta values.
+1. Upload the file into galaxy.
 
-        Output:
+2. Run the "Get TCGA 450k data" tool on the resultant tar file in your history.
 
-        Beta values in tabular/matrix format which can be used in multiple tools.
+3. Once you have the "Probe and sample wise data" generated, Run "Read TCGA 450k matrix" to generate beta values.
 
-        Eg: ELMER, minfi, bumphunter
+**Output**:
 
-    ]]>
+Beta values in tabular/matrix format which can be used in multiple tools.
+
+*Example*: ELMER, minfi, bumphunter
     </help>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btu049</citation>
