@@ -1,5 +1,5 @@
-<tool id="get_TCGA_Methylation_data" name="Get TCGA 450k data" version="1.0">
-    <description>Get 450k methylation arrays which are in IDAT format from TCGA GDAC and unpack</description>
+<tool id="get_TCGA_Methylation_data" name="Unpack TCGA 450k data" version="1.0">
+    <description>Unpack 450k methylation arrays which are in IDAT format from TCGA cancer datasets hosted on GDAC</description>
     <stdio>
         <exit_code range="1:" />
     </stdio>
