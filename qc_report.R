@@ -30,5 +30,5 @@ files = gsub(".+/","",pd$filenames)
 # Produce PDF file
 if (!is.null(options$pdffile)) {
 	# Make PDF of density plot
-	minfi::qcReport(rgSet=options$rgset,sampNames=files,sampGroups=pd$status,pdf=options$pdffile)
+	minfi::qcReport(rgSet=RGset,sampNames=files,sampGroups=pd$status,pdf=options$pdffile)
 }
