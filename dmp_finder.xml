@@ -11,7 +11,7 @@
     </command>
     <inputs>
         <param name="RGset" type="data" format="rdata" label="Choose RGset for MDS plot" />
-        <param name="shrinkVar" type="boolean" checked="false" truevalue="TRUE" falsevalue="" label="Should variance shrinkage be used?" />
+        <param name="shrinkVar" type="boolean" checked="false" truevalue="TRUE" falsevalue="FALSE" label="Should variance shrinkage be used?" />
     </inputs>
 	<outputs>
 	  <data format="txt" name="DMPs" label="Differentially methylated positions/CpGs" from_work_dir="dmpfinder_result.txt" />

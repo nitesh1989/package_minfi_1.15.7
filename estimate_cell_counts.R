@@ -25,10 +25,7 @@ if(!is.null(options$rgset)){
 # Set phenotype data
 pd = pData(RGset)
 
-# Produce PNG file
-if (!is.null(options$pngfile)) {
-	# Make PNG of density plot
-	png(options$pngfile)
-	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot",xlab=options$xlabel)
-	dev.off()
-}
+# TODO
+result = minfi::estimateCellCounts(dat=RGset,meanPlot=FALSE)
+
+write.table(result,file="estimated_cell_counts.txt",quote=FALSE,row.names=FALSE)

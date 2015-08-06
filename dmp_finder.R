@@ -12,7 +12,7 @@ library('minfi', quietly=TRUE, warn.conflicts=FALSE,verbose = FALSE)
 # 4. target data type
 option_specification = matrix(c(
   'rgset','i',1,'character',
-  'shrinkVar','s',2,'charater'
+  'shrinkVar','s',2,'character'
 ), byrow=TRUE, ncol=4);
 
 # Parse options
