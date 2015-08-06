@@ -74,9 +74,14 @@
               normalized_RGset = preprocessNoob(RGset)
           } else if ("${preprocess.preprocess_method}" == "raw"){
               normalized_RGset = preprocessRaw(RGset)
+          } else if ("${preprocess.preprocess_method}" == "illumina"){
+              normalized_RGset = preprocessIllumina(RGset,bg.correct = TRUE, normalize = c("controls", "no"),reference = 1))
           } else {
               normalized_RGset = RGset
           }
+          ### else if ("${preprocess.preprocess_method}" == "swan"){
+          ###    normalized_RGset = preprocessSWAN(RGset)
+
 
           ### Save file as RGset in the working directory OUTPUT-1
           save(RGset, file="RGset.rdata")
@@ -98,6 +103,9 @@
               <option value="quantile">Quantile Normalization</option>
               <option value="raw">Raw Normalization</option>
               <option value="noob">Noob Normalization</option>
+              <!-- <option value="swan">SWAN normalization</option> -->
+              <option value="illumina">Illumina:Genome Studio Normalization</option>
+              <!-- <option value="funnnorm">Functional normalization</option> -->
            </param>
         </conditional>
     </inputs>
