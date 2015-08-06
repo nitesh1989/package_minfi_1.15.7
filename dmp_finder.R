@@ -12,32 +12,28 @@ library('minfi', quietly=TRUE, warn.conflicts=FALSE,verbose = FALSE)
 # 4. target data type
 option_specification = matrix(c(
   'rgset','i',1,'character',
-  'numPositions','n',2,'integer',
-  'mainTitle','t',2,'character',
-  'pdffile', 'f', 2, 'character'
+  'shrinkVar','s',2,'charater'
 ), byrow=TRUE, ncol=4);
 
 # Parse options
 options = getopt(option_specification);
 
 options$rgset
-options$numPositions
-options$mainTitle
-options$pdffile
 
 # Load the RGset data
 if(!is.null(options$rgset)){
 	load(options$rgset)
 }
 
+# Get beta values
+beta = getBeta(RGset)
+
 # Set phenotype data
 pd = pData(RGset)
+phenotype = pd$status
+
 files = gsub(".+/","",pd$filenames)
 
-# Produce PDF file
-if (!is.null(options$pdffile)) {
-	# Make PDF of density plot
-	pdf(file=options$pdffile)
-	minfi::mdsPlot(dat=RGset,sampNames=files,sampGroups=pd$status,main=options$mainTitle,numPositions=as.integer(options$numPositions),pch=19)
-	dev.off()
-}
+dmp = dmpFinder(dat=beta,pheno=pd$status,type="categorical",shrinkVar=options$shrinkVar)
+
+write.table(dmp,file="dmpfinder_result.txt",quote=FALSE,row.names=FALSE)
