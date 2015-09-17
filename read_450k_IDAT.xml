@@ -113,6 +113,7 @@
         <data name="RGset" format="rdata" label="RGset from input IDAT files" from_work_dir="RGset.rdata"/>
         <data name="beta_values" format="txt" label="Beta value matrix from input IDAT files" from_work_dir="beta_values.txt"/>
     </outputs>
+    <!-- WRITE TESTS -->
     <help>
 
 ** What it does**

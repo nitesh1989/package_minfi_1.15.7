@@ -43,8 +43,3 @@ if (!is.null(options$pngfile)) {
 	minfi::densityPlot(dat=RGset,sampGroups=pd$status,main = "Density Plot",xlab=options$xlabel)
 	dev.off()
 }
-
-
-
-
-
