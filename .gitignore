@@ -1,6 +1,6 @@
 # Test data #
 ###################
-test_data/*
+scripts/*
 temp.R
 
 # Compiled source #
