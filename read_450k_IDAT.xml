@@ -1,7 +1,7 @@
-<tool id="read_450k_IDAT" name="Read 450K IDAT files" version="1.0">
-    <description>Read in Illumina's 450k methylation arrays which are in IDAT format</description>
+<tool id="read_450k_IDAT" name="Read Illumina 450k IDAT " version="1.0">
+    <description>format to get Beta Values</description>
     <requirements>
-        <requirement type="R-module" version="1.15.7">minfi</requirement>
+        <requirement type="package" version="1.15.7">minfi</requirement>
     </requirements>
     <stdio>
         <exit_code range="1:" />
@@ -62,6 +62,7 @@
           status = minfi_config[match(gsub(".+/","",Basename), minfi_config\$name),"status"]
           targets = data.frame(Basename=Basename,status=status)
 
+          targets
           ### Read 450k files
           RGset = read.450k.exp(targets=targets,verbose=T)
           RGset
@@ -75,7 +76,7 @@
           } else if ("${preprocess.preprocess_method}" == "raw"){
               normalized_RGset = preprocessRaw(RGset)
           } else if ("${preprocess.preprocess_method}" == "illumina"){
-              normalized_RGset = preprocessIllumina(RGset,bg.correct = TRUE, normalize = c("controls", "no"),reference = 1))
+              normalized_RGset = preprocessIllumina(RGset,bg.correct = TRUE, normalize = c("controls", "no"),reference = 1)
           } else {
               normalized_RGset = RGset
           }
@@ -84,7 +85,8 @@
 
 
           ### Save file as RGset in the working directory OUTPUT-1
-          save(RGset, file="RGset.rdata")
+          getwd()
+          save(RGset, file="RGset.RData")
 
 
           ## Get beta values from Proprocessed data
@@ -99,44 +101,63 @@
         <param name="case" type="data_collection" format="idat" label="Case" collection_type="list:paired"/>
         <conditional name="preprocess">
            <param name="preprocess_method" type="select" label="Select Preprocessing Method">
-              <option value="no_normalization">NO Normalization</option>
+              <option value="no_normalization">No Normalization</option>
               <option value="quantile">Quantile Normalization</option>
               <option value="raw">Raw Normalization</option>
               <option value="noob">Noob Normalization</option>
-              <!-- <option value="swan">SWAN normalization</option> -->
               <option value="illumina">Illumina:Genome Studio Normalization</option>
-              <!-- <option value="funnnorm">Functional normalization</option> -->
            </param>
         </conditional>
     </inputs>
     <outputs>
-        <data name="RGset" format="rdata" label="RGset from input IDAT files" from_work_dir="RGset.rdata"/>
+        <data name="RGset" format="RData" label="RGset from input IDAT files" from_work_dir="RGset.RData"/>
         <data name="beta_values" format="txt" label="Beta value matrix from input IDAT files" from_work_dir="beta_values.txt"/>
     </outputs>
     <!-- WRITE TESTS -->
-    <help>
+    <help><![CDATA[
 
-** What it does**
+**What it does**
 
-Reads in Illumina 450K file which are in IDAT format. Each sample needs both the
-Red and Green channel IDAT files.
+Reads in Illumina 450K file which are in IDAT format. Each sample needs both the Red and Green channel IDAT files.
 
-**Input**: IDAT files (Both Red and Green channel). Make paired dataset collections,
-with RED and GREEN channel IDAT files.
 
-1. Upload IDAT(Both Red and green channel) files using the upload tool in Galaxy.
+**Input**:
 
-2. Once the upload is completed, select the "Operations on Multiple Datasets" in the history panel.
+*Case* : Dataset collection with all samples which are of one phenotype (Example: Cancer, Disease state, Phenotype 1)
 
-3. Select the pairs of IDAT files to be analyzed, and click "For all selected".
+*Control* : Dataset collection with all samples which are of base normal phenotype (Example: Normals, Non-Disease state, Phenotype 2)
 
-4. Choose the "Build List of Dataset pairs". Make the pairs and label the collections.
+*Select Preprocessing Method*: Choose one of the many preprocessing methods available. For more information on the different preprocessing methods
+refer to the minfi manual, https://www.bioconductor.org/packages/release/bioc/manuals/minfi/man/minfi.pdf
 
-5. Once the two dataset collections are prepared, run the tool to build the RGset.
+**Output**:
 
-**Output**: RData file, which contains the RGset for IDAT files.
+RData file, which contains the RGset for IDAT files. RGSet is a RGChannelSet object, which contains the raw data from the IDAT files: green intensities and red intensities.
 
-    </help>
+
+Beta values, text file of all the beta values contained in the samples.
+
+**How to Use**
+
+IDAT files (Both Red and Green channel). Make paired dataset collections, with RED and GREEN channel IDAT files.
+
+Step 1: Upload IDAT(Both Red and green channel) files using the upload tool in Galaxy.
+
+Step 2: Once the upload is completed, select the "Operations on Multiple Datasets" in the history panel.
+
+Step 3: Select the list of IDAT files to be analyzed, and click "For all selected".
+
+Step 4:
+
+Choose the "Build List of Dataset pairs". Make the pairs and label the dataset collections. Once you enter the
+"Create a collection of paried datasets" dialogue box, click on "Clear filters" and then choose the "Forward" == Green channel,
+and "Reverse" == Red channel files. You should see the pairs in green color in the bottom panel. Rename your common prefix for
+the file, by removing the trailing underscore "_", and name your collection. You should have one dataset collection for "Case" and another with "Control".
+
+Step 5: Once the two dataset collections are prepared, run the tool to build the RGset.
+
+
+  ]]></help>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btu049</citation>
     </citations>

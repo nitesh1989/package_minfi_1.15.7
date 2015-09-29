@@ -1,13 +1,13 @@
-<tool id="density_plot" name="Density Plot" version="1.0">
-    <description>of 450k data beta values</description>
+<tool id="block_finder" name="Block Finder" version="1.0">
+    <description> to find blocks (large scale regions) of methylation differences for Illumina methylation arrays</description>
     <requirements>
         <requirement type="R-module" version="1.15.7">minfi</requirement>
     </requirements>
     <command detect_errors="exit_code">
-        Rscript "${density_plot}"
+        Rscript "${block_finder}"
     </command>
     <configfiles>
-        <configfile name="density_plot"><![CDATA[
+        <configfile name="block_finder"><![CDATA[
 ## Load library
 
 library(minfi, quietly=TRUE, warn.conflicts=FALSE,verbose = FALSE)
@@ -31,7 +31,7 @@ if (!is.null("${pdffile}")) {
       ]]></configfile>
     </configfiles>
     <inputs>
-        <param name="RGset" type="data" format="RData" label="Choose RGset for Density plot" />
+        <param name="RGset" type="data" label="Choose RGset for Density plot" />
         <param name="xlabel" size="30" type="text" value="Beta values for RGset" label="Label for X axis"/>
     </inputs>
 	<outputs>
@@ -52,16 +52,17 @@ Create density plots for 450k data, this is used for quality control.
 
 **Input** :
 
-RGset:
-
-An RGChannelSet We either use the getBeta function to get Beta values (for the first two) or we assume the matrix contains Beta values.
-
-RGSet is a RGChannelSet object, which contains the raw data from the IDAT files: green intensities and red intensities.
+RGset: An RGChannelSet We either use the getBeta function to get Beta values (for the first two) or we assume the matrix contains Beta values.
 
 It is better to give the tool, RGset as input to make it easier to collect the phenotype data from the object.
 
-**Output**: PDF file of the density plot chosen.
+**Output**: PDF or PNG file based on the option chosen.
 
+**Example**:
+
+- Input file (Source file Second)
+
+.. image:: /Users/nturaga/Documents/galaxyproject/tools-iuc/tool_collections/methylation_toolkit/minfi_tools/help-images/density_plot.png
     ]]></help>
     <citations>
         <citation type="doi">10.1093/bioinformatics/btu049</citation>
